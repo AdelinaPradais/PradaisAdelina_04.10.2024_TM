@@ -9,7 +9,7 @@ contractelor de către toți candidații sau prin nealocarea de nr. RMU (Registr
 
 Tool-ul utilizat: MySQL Workbench
 
-	<h2>1. Database Schema</h2>
+	<h2>Database Schema</h2>
 Astfel, baza de date este alcătuită din 6 tabele interconectate:
 * **date_identificare_candidati** (unde se regăsesc informațiile personale ale candidaților la înscriere)
 * **date_cotact** (surprind principalele date de contact pentru fiecare candidat) conectată cu **date_identificare_candidati** relație care a fost implementată prin foreign key (id_candidat)
@@ -21,9 +21,9 @@ Astfel, baza de date este alcătuită din 6 tabele interconectate:
 Tabelele sunt legate prin chei primare și secundare, ele fiind evidențiate, iar relațiile dintre tabele sunt atât de tip 1:1 cât și 1:n (un candidat poate avea mai multe contracte de studii dacă a fost admis la mai multe facultăți și a ales să semneze contracte pentru toate).
 Pentru a se vedea ușor relația dintre tabele și modul în care ele sunt legate am inclus în proiect și diagrama EER (am generat raportul de execuție din reverse engineering).
 
-	<h2>2. Interogări Database</h2>
+	<h2>Interogări Database</h2>
 
-	<h3>i. DDL (Data Definition Language)</h3>
+	<h3>DDL (Data Definition Language)</h3>
 Ulterior creării bazei de date și a tabelelor aferente cu ajutorul instrucțiunilor DDL, 
 --- creare bază de date
 	create database inscrieri_facultate;
@@ -127,7 +127,7 @@ CREATE TABLE burse(
 
 
 
-	<h3>ii. DML (Data Manipulation Language)</h3>
+	<h3>DML (Data Manipulation Language)</h3>
 După care am introdus sau șters date folosind instrucțiuni DML. Înaintea fiecărei instrucțiuni am introdus explicația scenariului sau a acțiunii dorite a fi executate.
 --- adăugare valori multiple în coloanele din tabela date_identificare_candidati, în același timp
 	insert into date_identificare_candidati (nume_candidat, prenume_candidat, data_nastere_candidat, CNP_candidat)
@@ -193,7 +193,7 @@ După care am introdus sau șters date folosind instrucțiuni DML. Înaintea fie
 
 
 
-	<h3>iii. DQL (Data Query Language)</h3>
+	<h3>DQL (Data Query Language)</h3>
 După ce m-am asigurat că am date introduse pentru diferite scenarii, cu ajutorul instrucțiunilor DQL (select, select anumite coloane, filtrare cu where, filtrări cu like, filtrări cu AND și OR, funcții agregate, filtrări pe
 funcții agregate, joinuri - inner join, left join, right join, cross join, limite, order by, subquery-uri) am creat diverse scenarii.
 --- returnarea burselor oferite (interogare simplă pe toată tabela burse)
@@ -325,6 +325,6 @@ funcții agregate, joinuri - inner join, left join, right join, cross join, limi
 
 Am ales scrierea instrucțiunilor în ordinea în care ele se vor rula și executa pentru a nu returna erori de referențiere, deci cu ajutorul MySQL Workbench se poate rula de la sus în jos întregul proiect.
 
-	<h2>3. Concluzii</h2>
+	<h2>Concluzii</h2>
 Toate instrucțiunile utilizate au fost executate cu succes și rezultatele returnate sunt corecte. 
 Proiectul surprinde situații reale și interconectarea dintre tabele au fost gândite pentru a reda cât mai bine acest lucru. 
