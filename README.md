@@ -1,6 +1,6 @@
-<h1>Database Project pentru **înscrieri la facultate**</h1>
+# Database Project pentru **înscrieri la facultate**</h1>
 
-
+## Scopul acestui proiect:
 În urma finalizării cursului de SOFTWARE TESTER (Testare Manuală), am ales pentru partea practică a proiectului final: SQL, respectiv crearea unei baze de date și executarea instrucțiunilor specifice SQL utilizând MySQL Workbench.
 
 Baze de date creată reprezintă situația de înscrieri la facultate.
@@ -9,7 +9,7 @@ contractelor de către toți candidații sau prin nealocarea de nr. RMU (Registr
 
 Tool-ul utilizat: MySQL Workbench
 
-	<h2>Database Schema</h2>
+## Database Schema
 Astfel, baza de date este alcătuită din 6 tabele interconectate:
 * **date_identificare_candidati** (unde se regăsesc informațiile personale ale candidaților la înscriere)
 * **date_cotact** (surprind principalele date de contact pentru fiecare candidat) conectată cu **date_identificare_candidati** relație care a fost implementată prin foreign key (id_candidat)
@@ -21,10 +21,11 @@ Astfel, baza de date este alcătuită din 6 tabele interconectate:
 Tabelele sunt legate prin chei primare și secundare, ele fiind evidențiate, iar relațiile dintre tabele sunt atât de tip 1:1 cât și 1:n (un candidat poate avea mai multe contracte de studii dacă a fost admis la mai multe facultăți și a ales să semneze contracte pentru toate).
 Pentru a se vedea ușor relația dintre tabele și modul în care ele sunt legate am inclus în proiect și diagrama EER (am generat raportul de execuție din reverse engineering).
 
-	<h2>Interogări Database</h2>
+## Interogări Database
 
-	<h3>DDL (Data Definition Language)</h3>
+### DDL (Data Definition Language)
 Ulterior creării bazei de date și a tabelelor aferente cu ajutorul instrucțiunilor DDL, 
+
 --- creare bază de date
 	create database inscrieri_facultate;
 
@@ -127,8 +128,9 @@ CREATE TABLE burse(
 
 
 
-	<h3>DML (Data Manipulation Language)</h3>
+### DML (Data Manipulation Language)
 După care am introdus sau șters date folosind instrucțiuni DML. Înaintea fiecărei instrucțiuni am introdus explicația scenariului sau a acțiunii dorite a fi executate.
+
 --- adăugare valori multiple în coloanele din tabela date_identificare_candidati, în același timp
 	insert into date_identificare_candidati (nume_candidat, prenume_candidat, data_nastere_candidat, CNP_candidat)
 	values ('Popa', 'Adam', '1997-02-09', '1970209517634'),('Cristea', 'Bucur', '2000-04-09', '5000409017025'),
@@ -193,9 +195,10 @@ După care am introdus sau șters date folosind instrucțiuni DML. Înaintea fie
 
 
 
-	<h3>DQL (Data Query Language)</h3>
+### DQL (Data Query Language)
 După ce m-am asigurat că am date introduse pentru diferite scenarii, cu ajutorul instrucțiunilor DQL (select, select anumite coloane, filtrare cu where, filtrări cu like, filtrări cu AND și OR, funcții agregate, filtrări pe
 funcții agregate, joinuri - inner join, left join, right join, cross join, limite, order by, subquery-uri) am creat diverse scenarii.
+
 --- returnarea burselor oferite (interogare simplă pe toată tabela burse)
 	select * from burse;
 
@@ -251,7 +254,7 @@ funcții agregate, joinuri - inner join, left join, right join, cross join, limi
 	select liceu, profil, nr_ani from istoric_studii
 		where nr_ani > (select avg(nr_ani) from istoric_studii);
 
---- INNER JOIN
+#### --- INNER JOIN
 --- returnarea numelui și prenumelui și a nr contractului de studii pentru fiecare candidat (legătură între tabela date_identificare_candidati și contracte_studii)
 	select nume_candidat, prenume_candidat, nr_contract from date_identificare_candidati inner join contracte_studii
 		on date_identificare_candidati.id=contracte_studii.id_candidat;
@@ -267,7 +270,7 @@ funcții agregate, joinuri - inner join, left join, right join, cross join, limi
 		inner join contracte_studii on contracte_studii.id_candidat=date_identificare_candidati.id
 		inner join burse on burse.id_contract=contracte_studii.id_contract;
 
---- LEFT JOIN: 
+#### --- LEFT JOIN: 
 --- returnarea nr contractului de studii, a numelui și prenumelui pentru fiecare candidat, prima redare fiind nr. de contract
 	select nr_contract, nume_candidat, prenume_candidat
 		from date_identificare_candidati left join contracte_studii on date_identificare_candidati.id=contracte_studii.id_candidat;
@@ -276,7 +279,7 @@ funcții agregate, joinuri - inner join, left join, right join, cross join, limi
 		from date_identificare_candidati left join istoric_studii on date_identificare_candidati.id=istoric_studii.id_candidat
         where liceu != null or nr_ani >3;
         
---- RIGHT JOIN: 
+#### --- RIGHT JOIN: 
 --- returnarea județului, a localității de domiciliu, a numelui și prenumelui pentru fiecare candidat, inclusiv pentru acei candidați care nu au încă adrese completate
 	select judet, localitate, nume_candidat, prenume_candidat
 		from adrese_domiciliu_candidati right join date_identificare_candidati on date_identificare_candidati.id=adrese_domiciliu_candidati.id_candidat;
@@ -287,7 +290,7 @@ funcții agregate, joinuri - inner join, left join, right join, cross join, limi
     select email_candidat, nume_candidat, prenume_candidat
 		from date_contact right join date_identificare_candidati on date_identificare_candidati.id=date_contact.id_candidat;
 
---- CROSS JOIN 
+#### --- CROSS JOIN 
 --- produs cartezian între tabela de burse și tabela date_identificare_candidați
 	select id_bursa, valoare_bursa, nume_candidat, prenume_candidat
 		from burse cross join date_identificare_candidati;
@@ -325,6 +328,6 @@ funcții agregate, joinuri - inner join, left join, right join, cross join, limi
 
 Am ales scrierea instrucțiunilor în ordinea în care ele se vor rula și executa pentru a nu returna erori de referențiere, deci cu ajutorul MySQL Workbench se poate rula de la sus în jos întregul proiect.
 
-	<h2>Concluzii</h2>
+## Concluzii
 Toate instrucțiunile utilizate au fost executate cu succes și rezultatele returnate sunt corecte. 
 Proiectul surprinde situații reale și interconectarea dintre tabele au fost gândite pentru a reda cât mai bine acest lucru. 
