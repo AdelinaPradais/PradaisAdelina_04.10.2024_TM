@@ -49,13 +49,15 @@ Ulterior creării bazei de date și a tabelelor aferente cu ajutorul instrucțiu
 --- introducere cheie secundara în tabela date_contact pentru a crea o legătură între cele 2 tabele = modificăm o coloana
 	alter table date_contact 
 		add foreign key (id_candidat) references date_identificare_candidati(id);
-	
+		
+```sql	
 CREATE TABLE adrese(
     - `localitate` varchar(20),
     - `strada` varchar(20),
     - `nr` varchar(5),
     - `ap` integer,
     - `judet` varchar(20));
+```
 
 3. CREATE TABLE istoric_studii(
     - `id_istoric` integer primary key auto_increment,
@@ -65,7 +67,7 @@ CREATE TABLE adrese(
     - `nr_ani` integer,
 	foreign key (id_candidat) references date_identificare_candidati(id));
 	
-5. CREATE TABLE contracte_studii(
+4. CREATE TABLE contracte_studii(
     - `id_contract` integer primary key auto_increment,
 	- `id_candidat` integer, # cheie secundară către coloana id din tabela date_identificare_candidati
 	- `facultate` varchar (50),
@@ -94,8 +96,9 @@ CREATE TABLE adrese(
 ```
 
 --- creare tabelă nouă
+
 5. CREATE TABLE adrese_domiciliu(
-   - ` id_adresa` integer primary key auto_increment,
+    - ` id_adresa` integer primary key auto_increment,
 	- `id_candidat` integer, # cheie secundară către coloana id din tabela date_identificare_candidati
 	- `judet` varchar(20),
     - `localitate` varchar(20),
@@ -104,14 +107,17 @@ CREATE TABLE adrese(
     - `sc` char(3),
     - `ap` integer,
 	foreign key (id_candidat) references date_identificare_candidati(id));   
-    
+
+```sql     
 --- modificare tabela adrese_domiciliu - șterg coloana scară
 	alter table adrese_domiciliu drop column sc;
 
 --- redenumit tabelă adrese_domiciliu
 	rename table adrese_domiciliu to adrese_domiciliu_candidati;
+```
 
 --- creare tabelă nouă de burse în cadrul căreia vor fi legate 3 tabele
+
 6. CREATE TABLE burse(
     - `id_bursa` integer primary key auto_increment,
 	- `id_candidat` integer, # cheie secundară către coloana id din tabela date_identificare_candidati
@@ -347,7 +353,9 @@ Am ales scrierea instrucțiunilor în ordinea în care ele se vor rula și execu
 
 ## Concluzii
 **Aplicarea SQL**: Proiectul a oferit o experiență practică în aplicarea conceptelor SQL, inclusiv în definirea datelor, manipularea și interogarea lor. Crearea de tabele, stabilirea de relații și efectuarea interogărilor au îmbunătățit înțelegerea SQL. Toate instrucțiunile utilizate au fost executate cu succes și rezultatele returnate sunt corecte. 
+
 **Instrumente utilizate**: S-a utilizat ca instrument: MySQL Workbench pentru gestionarea bazelor de date. Capacitatea de a transpune proiectele conceptuale în cod SQL a fost dezvoltată și perfecționată în timpul proiectului.
+
 **Realismul datelor utilizate**: Proiectul surprinde situații reale și interconectarea dintre tabele au fost gândite pentru a reda cât mai bine acest lucru. 
 
 *În concluzie*, acest proiect a reprezentat o oportunitate de a aplica cunoștințele teoretice la un scenariu practic, întărind conceptele și abilitățile SQL, și de lucru cu baze de date. Acesta va ajuta ca fundație pentru explorarea și îmbunătățirea ulterioară în proiectarea și gestionarea bazelor de date. Experiența acumulată în urma acestui proiect va contribui la consolidarea cunoștințelor în lucrul cu baze de date.
